@@ -6,8 +6,15 @@ include 'Database.php';
 
 <?php
 $db = new Database;
-$query = "SELECT * FROM tb_login";
+$query = "SELECT DISTINCT name, email, skill FROM tb_login";
 $read = $db->select($query);
+
+?>
+
+<?php
+if(isset($_GET['msg'])){
+	echo "<span style= 'color:red'>".$_GET['msg']."</span>";
+}
 
 ?>
 		
@@ -15,10 +22,10 @@ $read = $db->select($query);
 	<caption>table title and/or explanatory text</caption>
 	<thead>
 		<tr>
-			<th width="25%">Name</th>
-			<th width="25%">Email</th>
-			<th width="25%">Skill</th>
-			<th width="25%">Action</th>
+			<th width="35%">Name</th>
+			<th width="20%">Email</th>
+			<th width="15%">Skill</th>
+			<th width="30%">Action</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -28,14 +35,15 @@ $read = $db->select($query);
 			<td><?php echo $row['name']; ?></td>
 			<td><?php echo $row['email']; ?></td>
 			<td><?php echo $row['skill']; ?></td>
-			<td><a href="update.php?i=1">Edit</a></td>
+			<td><a href="update.php?id=<?php echo $row['id']; ?>">Edit</a></td>
 		</tr>
 	<?php } ?>
 	<?php } else{ ?>
 		<p>Data is not availabe in here !!</p>
 	<?php } ?>
 	</tbody>
-</table>	
+</table>
+<a href="create.php">Create</a>	
 		
 
 
